@@ -70,6 +70,7 @@ void drop() {
   turn = -turn;
 }
 
+// アナログジョイスティックの状態を取得
 void read_JOY() {
   int x = analogRead(JOY_X);
   int y = analogRead(JOY_Y);
@@ -98,6 +99,7 @@ void read_JOY() {
   prev_moved = cur_moved;
 }
 
+// LEDに出力
 void disp() {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
