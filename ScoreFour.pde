@@ -1,5 +1,6 @@
 import processing.serial.*;
 
+// 勝敗判定のための直線クラス
 class Line {
   int x, y, z;
   Line(int x, int y, int z) {
@@ -12,6 +13,8 @@ class Line {
 Serial myPort;
 ArrayList < Line > [][][] lines = new ArrayList[4][4][4];
 
+
+// 勝敗判定のための直線クラスを初期化
 void init() {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
@@ -57,6 +60,7 @@ void cbcpy(int[][][] par, int[][][] child) {
   }
 }
 
+// 石を置く
 void drop(int[][][] state, int[][] filled, int x, int y, int turn, ArrayList < Integer > active) {
   state[x][y][filled[x][y]] = turn;
   filled[x][y]++;
@@ -65,6 +69,7 @@ void drop(int[][][] state, int[][] filled, int x, int y, int turn, ArrayList < I
   }
 }
 
+// 試合が終了してるかどうか
 boolean is_finished(int[][][] state, int x, int y, int z, int turn) {
   for (Line line: lines[x][y][z]) {
     for (int i = 0;; i++) {
@@ -82,6 +87,7 @@ boolean is_finished(int[][][] state, int x, int y, int z, int turn) {
   return false;
 }
 
+// 手を評価する
 int evaluate(int[][][] state, int[][] filled, int x, int y, int turn, ArrayList < Integer > active) {
   int turn_cpy = turn;
   while (true) {
@@ -99,6 +105,7 @@ int evaluate(int[][][] state, int[][] filled, int x, int y, int turn, ArrayList 
   }
 }
 
+// 手を決定する
 int determine_hand(int[][][] state, int[][] filled, int turn, ArrayList < Integer > active) {
   int max_value = Integer.MIN_VALUE;
   int res = 0;
